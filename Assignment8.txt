@@ -1,0 +1,140 @@
+DELIMITER /
+CREATE PROCEDURE P1()
+BEGIN
+DECLARE A INT(4);
+SELECT A;
+END /
+DELIMITER ;
+
+4.Write a PL/SQL block that accepts values of two non zero integer Ints from user. The block performs the following operation 
+( first_Int/second_Int + second_Int). The result of the operation should be stored in a PL/SQL variable and also displayed on the screen.
+
+DELIMITER /
+CREATE PROCEDURE OPR (X INT, Y INT)
+BEGIN
+DECLARE Z ;
+SET Z = (X+Y) ;
+SELECT Z ;
+END /
+DELIMITER ;
+
+
+mysql> DELIMITER ;
+mysql> CALL OPR (10,20);
++------+
+| Z    |
++------+
+|   30 |
++------+
+1 row in set (0.07 sec)
+
+Query OK, 0 rows affected (0.08 sec)
+
+mysql>
+
+
+Practice 5:
+
+Declare two SQL* plus variables named MAX_SALARY and MIN_SALARY that are of data type INT.
+Write a PL/SQL block that accepts deptno value from a user, selects the maximum salary and minimum salary paid in the department, from the EMP table and stores the corresponding values in MAX_SALARY and MIN_SALARY respectively. 
+Use appropriate SQL * plus command to see the modified values of MAX_SALARY and MIN_SALARY
+
+DELIMITER /
+DROP PROCEDURE IF EXISTS COMPUTE /
+CREATE PROCEDURE COMPUTE(DEPT INT)
+BEGIN
+SELECT MIN(SALARY) AS MIN_SAL, MAX(SALARY) AS MAX_SAL FROM EMPLOYEES WHERE DEPARTMENT_ID=DEPT;
+END /
+DELIMITER ;
+
+mysql> CALL COMPUTE(20);
++---------+----------+
+| MIN_SAL | MAX_SAL  |
++---------+----------+
+| 6000.00 | 13000.00 |
++---------+----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+Practice 6: 
+
+Write a PL/SQL block that accepts employee Int from a user and retrieves the salary for the employee from the EMP table. It determines the salary class as per the following criteria and displays the salary and salary class on the screen
+Criteria for deciding salary class: 
+•	If the salary is less than 2500, then it comes under the class 'LOW'
+•	If the salary is greater than or equal to  2500 and less than 5000, then it comes under class 'MEDIUM'.
+•	If the salary is greater than or equal to 5000, then it comes under class 'HIGH'
+
+
+DELIMITER /
+DROP PROCEDURE IF EXISTS Q6 /
+CREATE PROCEDURE Q6(ID INT)
+BEGIN
+DECLARE S DOUBLE;
+SELECT SALARY INTO S FROM EMPLOYEES WHERE EMPLOYEE_ID=ID;
+IF S<2500 THEN SELECT "LOW";
+ELSEIF S<5000 AND S>2500 THEN SELECT "MEDIUM";
+ELSEIF S>=5000 THEN SELECT "HIGH";
+END IF ;
+END /
+DELIMITER ;
+
+CALL Q6(200);
+
+mysql> CALL Q6(200);
++--------+
+| MEDIUM |
++--------+
+| MEDIUM |
++--------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+
+Practice 7:
+
+Write a PL/SQL block that accepts an integer value between 1 and 12 from a user and displays the name of the corresponding month. If the Int input  is not in the range +1 to +12 then the block should display the message “Invalid Month” on the screen
+
+
+DELIMITER /
+DROP PROCEDURE IF EXISTS Q7/
+CREATE PROCEDURE Q7(X INT)
+BEGIN
+WHILE X>=1 AND X<=12 DO
+CASE X
+WHEN 1 THEN SELECT "JAN" AS MONTH;
+WHEN 2 THEN SELECT "FEB" AS MONTH;
+WHEN 3 THEN SELECT "MAR" AS MONTH;
+WHEN 4 THEN SELECT "APR" AS MONTH;
+WHEN 5 THEN SELECT "MAY" AS MONTH;
+WHEN 6 THEN SELECT "JUN" AS MONTH;
+WHEN 7 THEN SELECT "JUL" AS MONTH;
+WHEN 8 THEN SELECT "AUG" AS MONTH;
+WHEN 9 THEN SELECT "SEP" AS MONTH;
+WHEN 10 THEN SELECT "OCT" AS MONTH;
+WHEN 11 THEN SELECT "NOV" AS MONTH; 
+WHEN 12 THEN SELECT "DEC"AS MONTH;
+ELSE
+SELECT "INVALID";
+END CASE ;
+SET X=0;
+END WHILE;
+END /
+DELIMITER ;
+
+CALL Q7(6);
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,255 @@
+2. list different database in MySQL
+ANS:
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dacstudent         |
+| humanresource      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+3. How to connect to specific database
+ANS:
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dacstudent         |
+| humanresource      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use dacstudent
+Database changed
+
+4. List all the tables available in given database
+ANS:
+
+mysql> use dacstudent
+Database changed
+mysql> SHOW TABLES;
++----------------------+
+| Tables_in_dacstudent |
++----------------------+
+| consolidatepk        |
+| consolidatepk1       |
+| employee             |
+| multipleexample      |
+| nullvalue            |
+| numericdatatype      |
+| primarykeyexample    |
+| primarykeyexample1   |
+| uniqueexample        |
++----------------------+
+9 rows in set (0.00 sec)
+
+5. Switch from one database to other
+ANS:
+
+mysql> SELECT DATABASE();
++------------+
+| DATABASE() |
++------------+
+| world      |
++------------+
+1 row in set (0.00 sec)
+
+6. Run the script "hrschema.sql" in your database
+ANS:
+
+mysql> SOURCE C:\AKASH\hrschema.sql
+Query OK, 0 rows affected, 1 warning (0.11 sec)
+
+Query OK, 1 row affected, 1 warning (0.21 sec
+
+7. List the tables that you have in the database now
+ANS:
+
+mysql> use dacstudent
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_dacstudent |
++----------------------+
+| consolidatepk        |
+| consolidatepk1       |
+| employee             |
+| multipleexample      |
+| nullvalue            |
+| numericdatatype      |
+| primarykeyexample    |
+| primarykeyexample1   |
+| uniqueexample        |
++----------------------+
+9 rows in set (0.00 sec)
+
+8. Describe the structure of each table in MySQL
+ANS:
+
+mysql> show tables;
++----------------------+
+| Tables_in_dacstudent |
++----------------------+
+| consolidatepk        |
+| consolidatepk1       |
+| employee             |
+| multipleexample      |
+| nullvalue            |
+| numericdatatype      |
+| primarykeyexample    |
+| primarykeyexample1   |
+| uniqueexample        |
++----------------------+
+9 rows in set (0.00 sec)
+
+mysql> DESCRIBE EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| EMPID       | int         | YES  |     | NULL    |       |
+| EMPNAME     | varchar(50) | YES  |     | NULL    |       |
+| EMPDOB      | datetime    | YES  |     | NULL    |       |
+| EMPMOBILENO | bigint      | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.07 sec)
+
+mysql> DESC EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| EMPID       | int         | YES  |     | NULL    |       |
+| EMPNAME     | varchar(50) | YES  |     | NULL    |       |
+| EMPDOB      | datetime    | YES  |     | NULL    |       |
+| EMPMOBILENO | bigint      | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+9. Show the data from each table in MySQL
+ANS:
+
+mysql> select * from employee;
++-------+---------+---------------------+-------------+
+| EMPID | EMPNAME | EMPDOB              | EMPMOBILENO |
++-------+---------+---------------------+-------------+
+|   101 | AKASH   | 2021-07-02 00:00:00 |  8928811866 |
+|   101 | AKASH   | 2021-07-02 12:26:02 |  8928811866 |
++-------+---------+---------------------+-------------+
+2 rows in set (0.06 sec)
+
+
+10. Interact with MySQL WorkBench Software
+ANS:
+
+
+11. Clear the MySQL command prompt
+ANS:
+
+mysql> SYSTEM CLS
+
+12. Fire command to check current user in database
+ANS:
+
+TO CHECK CURRENT DATABASE ==>
+
+mysql> select database();
++------------+
+| database() |
++------------+
+| dacstudent |
++------------+
+1 row in set (0.00 sec)
+
+TO CHECK CURRENT USER ==>
+
+mysql> SELECT USER();
++-----------------+
+| USER()          |
++-----------------+
+| akash@localhost |
++-----------------+
+1 row in set (0.06 sec)
+
+13. Fire command to see current date and time of server
+ANS:
+
+mysql> SELECT LOCALTIME();
++---------------------+
+| LOCALTIME()         |
++---------------------+
+| 2021-07-01 14:14:37 |
++---------------------+
+1 row in set (0.00 sec)
+
+16. Observe the command "select null;"
+      Identify what is null
+ANS:
+
+mysql> SELECT NULL;
++------+
+| NULL |
++------+
+| NULL |
++------+
+1 row in set (0.00 sec)
+
+NULL: DATA MISSING , DATA IS NOT KNOWN DATA IS NULL. IT ITSELF CONTAINS UNIQUE VALUE MEANS EVERY NULL IS DIFFERENT THAN OTHER NULL.
+
+17. Create your own tables sql file and try to execute in the database.
+ANS:
+
+mysql> create table assignment1
+    -> (
+    -> SID INT,
+    -> SNAME VARCHAR(20),
+    -> BRANCH VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (2.17 sec)
+
+mysql> INSERT INTO ASSIGNMENT1 VALUES(100,'AKASH','ELECTRONICS');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> SELECT * FROM ASSIGNMENT1;
++------+-------+-------------+
+| SID  | SNAME | BRANCH      |
++------+-------+-------------+
+|  100 | AKASH | ELECTRONICS |
++------+-------+-------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO ASSIGNMENT1(SID,SNAME) VALUES(200,'SAGAR');
+Query OK, 1 row affected (0.35 sec)
+
+mysql> SELECT * FROM ASSIGNMENT1;
++------+-------+-------------+
+| SID  | SNAME | BRANCH      |
++------+-------+-------------+
+|  100 | AKASH | ELECTRONICS |
+|  200 | SAGAR | NULL        |
++------+-------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE ASSIGNMENT1;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| SID    | int         | YES  |     | NULL    |       |
+| SNAME  | varchar(20) | YES  |     | NULL    |       |
+| BRANCH | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.16 sec
+

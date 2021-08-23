@@ -1,0 +1,16 @@
+1.The HR department needs a report of all employees. Write a query to display the last name, department number, and department name for all the employees.
+SELECT LAST_NAME,DEPARTMENT_ID,(SELECT DEPARTMENT_NAME FROM DEPARTMENTS D WHERE D.DEPARTMENT_ID=E.DEPARTMENT_ID) 
+FROM EMPLOYEES E;
+
+
+2. The HR department needs a report of employees in Toronto. Display the last name, job, department number, and the department name for all employees who work in Toronto.
+
+SELECT e.last_name, e.job_id, e.department_id, d.department_name,L.CITY FROM employees e JOIN departments d ON
+ (e.department_id = d.department_id) JOIN locations l ON (d.location_id = l.location_id) WHERE LOWER(l.city) = 'toronto';
+
+3. Create a report to display employees’ last name and employee number along with their manager’s last name and manager number. Label the columns Employee, Emp#, Manager, and Mgr#, respectively. 
+SELECT E1.LAST_NAME,E1.EMPLOYEE_ID,E2.MANAGER_ID FROM EMPLOYEES E1 JOIN EmployeeS E2 
+ON E2.MANAGER_ID=E1.EMPLOYEES_ID;
+
+4. WAQ to display all employees including King, who has no manager. Order the results by the employee number. 
+SELECT * FROM EmployeeS WHERE MANAGER_ID IS NULL ORDER BY EMPLOYEE_ID;

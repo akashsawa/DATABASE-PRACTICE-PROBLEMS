@@ -1,0 +1,138 @@
+1) List all emplyees name with their salary who are in admin department.
+
+
+> db.emp.find({ dept: "Admin" }, { ename :1,sal:1 });
+{ "_id" : ObjectId("610520de2c1966f19c95f093"), "ename" : "Kohli", "sal" : 3000 }
+{ "_id" : ObjectId("610520de2c1966f19c95f096"), "ename" : "Jadeja", "sal" : 2500 }
+
+2) List all emplyees name with their salary and designation who are in Purchase department.
+
+> db.emp.find({ dept: "Purchase" }, { ename :1,sal:1 });
+{ "_id" : ObjectId("610520de2c1966f19c95f091"), "ename" : "Sachin", "sal" : 6000 }
+{ "_id" : ObjectId("610520de2c1966f19c95f094"), "ename" : "Dravid", "sal" : 4000 }
+
+3) List all employees no, name, salary who are in the Sales department and Designation is Manager.
+
+db.emp.find ( 
+{
+$and : 
+[
+{dept: "Sales" } , {desig : "manager" } 
+]
+},
+{ eno : 1, ename :1,sal:1 }
+);
+
+> db.emp.find (
+... {
+... $and :
+... [
+... {dept: "Sales" } , {desig : "manager" }
+... ]
+... },
+... { eno : 1, ename :1,sal:1 }
+... );
+{ "_id" : ObjectId("610520de2c1966f19c95f092"), "eno" : 2, "ename" : "Dhoni", "sal" : 5000 }
+{ "_id" : ObjectId("610520de2c1966f19c95f095"), "eno" : 5, "ename" : "Bumrah", "sal" : 3500 }
+{ "_id" : ObjectId("610520de2c1966f19c95f097"), "eno" : 7, "ename" : "Rohit", "sal" : 4000 }
+
+4) calculate Annual salary of each emplyees
+
+db.emp.aggregate (
+
+{
+$project : { eno : 1, ename:1, _id : 0 , annual_sal : { $multiply : [ "$sal",12 ]
+}
+}
+}
+);
+
+> db.emp.aggregate (
+...
+... {
+... $project : { eno : 1, ename:1, _id : 0 , annual_sal : { $multiply : [ "$sal",12 ]
+... }
+... }
+... }
+... );
+{ "eno" : 1, "ename" : "Sachin", "annual_sal" : 72000 }
+{ "eno" : 2, "ename" : "Dhoni", "annual_sal" : 60000 }
+{ "eno" : 3, "ename" : "Kohli", "annual_sal" : 36000 }
+{ "eno" : 4, "ename" : "Dravid", "annual_sal" : 48000 }
+{ "eno" : 5, "ename" : "Bumrah", "annual_sal" : 42000 }
+{ "eno" : 6, "ename" : "Jadeja", "annual_sal" : 30000 }
+{ "eno" : 7, "ename" : "Rohit", "annual_sal" : 48000 }
+
+5) Convert the names of the emplyees in Lower case and display only no and name of each emplyees.
+
+db.emp.aggregate([{$project:{eno:1,ename:1,_id:0,Employee:{$toLower:['$ename']}}}])
+
+> db.emp.aggregate([{$project:{eno:1,ename:1,_id:0,Employee:{$toLower:['$ename']}}}])
+{ "eno" : 1, "ename" : "Sachin", "Employee" : "sachin" }
+{ "eno" : 2, "ename" : "Dhoni", "Employee" : "dhoni" }
+{ "eno" : 3, "ename" : "Kohli", "Employee" : "kohli" }
+{ "eno" : 4, "ename" : "Dravid", "Employee" : "dravid" }
+{ "eno" : 5, "ename" : "Bumrah", "Employee" : "bumrah" }
+{ "eno" : 6, "ename" : "Jadeja", "Employee" : "jadeja" }
+{ "eno" : 7, "ename" : "Rohit", "Employee" : "rohit" }
+
+6) Display each document of the collection emplyee the total salary of each emplyee should be displayed department wise.
+$concat
+
+
+
+7) Findout Total Salary manager designation wise.
+
+db.emp.aggregate (
+{
+$group :
+{ 
+_id : { $desig  : { $ match : "manager" } } ,
+sum_of_sal : {$sum : "$sal" } 
+}
+}
+);
+
+db.emp.aggregate (
+
+{
+$match : { desig : "manager" }
+,
+"sum" : { $sum : "sal" }
+}
+
+);
+
+db.emp.aggregate([{$match:{desig : "manager" , $sum : "sal "}}]); 
+
+8) Find The Average Salary of each department in emp collection.
+
+> db.emp.aggregate([{$group:{_id:null, "Average Salary":{$avg:"$sal"}}}]);
+{ "_id" : null, "Average Salary" : 4000 }
+
+
+9) Find The MAX Salary of each department in emp collection.
+
+db.emp.aggregate (
+{
+$group : 
+{ _id : null , 
+"max_sal" : { $max : "$sal" }
+}
+}
+);
+
+> db.emp.aggregate ( { $group :  { _id : null ,  "max_sal" : { $max : "$sal" } } } );
+{ "_id" : null, "max_sal" : 6000 }
+
+10)update The Document with null value in desig field where name is kohli.
+
+db.emp.update (
+{ desig } , { $set : { 
+
+11) To remove design Field having Null Values in emp Collection.
+
+
+
+
+
